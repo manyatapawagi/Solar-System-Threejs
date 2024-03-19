@@ -49,7 +49,7 @@ function createSun() {
     sun.add(main);
 
     const hdriLoader = new RGBELoader()
-    hdriLoader.load('http://127.0.0.1:5500/environment.hdr', function (texture) {
+    hdriLoader.load('environment.hdr', function (texture) {
         const envMap = pmremGenerator.fromEquirectangular(texture).texture;
         texture.dispose();
         material1.envMap = envMap
