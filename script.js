@@ -31,10 +31,9 @@ directionalLight.castShadow = true;
 scene.add(directionalLight);
 
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
-
-
-
 const loader = new THREE.TextureLoader();
+
+var celestialBodies = [];
 
 function createSun() {
     const sun = new THREE.Group();
@@ -59,6 +58,8 @@ function createSun() {
     const light = new THREE.PointLight(0xffca0a, 2, 0, 1);
     sun.add(light);
 
+    celestialBodies.push(sun);
+
     return sun;
 }
 
@@ -71,6 +72,8 @@ function createMercury() {
     });
     const main = new THREE.Mesh(geometry1, material1);
     mercury.add(main);
+
+    celestialBodies.push(mercury)
 
     return mercury;
 }
@@ -85,6 +88,8 @@ function createVenus() {
     const main = new THREE.Mesh(geometry1, material1);
     venus.add(main);
 
+    celestialBodies.push(venus)
+
     return venus;
 }
 
@@ -97,6 +102,8 @@ function createEarth() {
     });
     const main = new THREE.Mesh(geometry1, material1);
     earth.add(main);
+
+    celestialBodies.push(earth)
 
     return earth;
 }
@@ -111,6 +118,8 @@ function createMars() {
     const main = new THREE.Mesh(geometry1, material1);
     mars.add(main);
 
+    celestialBodies.push(mars)
+
     return mars;
 }
 
@@ -124,6 +133,8 @@ function createJupiter() {
     });
     const main = new THREE.Mesh(geometry1, material1);
     jupiter.add(main);
+
+    celestialBodies.push(jupiter)
 
     return jupiter;
 }
@@ -147,6 +158,8 @@ function createSaturn() {
     ring.rotation.x = Math.PI / 2;
     saturn.add(ring);
 
+    celestialBodies.push(saturn)
+
     return saturn;
 }
 
@@ -161,6 +174,8 @@ function createUranus() {
     const main = new THREE.Mesh(geometry1, material1);
     uranus.add(main);
 
+    celestialBodies.push(uranus)
+
     return uranus;
 }
 
@@ -174,6 +189,8 @@ function createNeptune() {
     });
     const main = new THREE.Mesh(geometry1, material1);
     neptune.add(main);
+
+    celestialBodies.push(neptune)
 
     return neptune;
 }
@@ -224,9 +241,52 @@ const solarSystem = createSolarSystem();
 solarSystem.position.set(150, 0, 0);
 scene.add(solarSystem);
 
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+window.addEventListener('click', onClick, false);
+
+function onClick(event) {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const intersects = raycaster.intersectObjects(celestialBodies, true);
+
+    if (intersects.length > 0) {
+        for (let i = 0; i < intersects.length; i++) {
+
+            console.log(intersects[i].object);
+
+            const intersectedObject = intersects[i].object;
+
+            const planetPosition = new THREE.Vector3();
+            intersectedObject.getWorldPosition(planetPosition);
+
+            const radius = intersectedObject.geometry.parameters.radius;
+
+            const direction = new THREE.Vector3().subVectors(camera.position, planetPosition).normalize();
+
+            const distance = radius * 6; 
+
+            const newPosition = planetPosition.clone().add(direction.multiplyScalar(distance));
+
+            const tween = new TWEEN.Tween(camera.position).to(newPosition, 1000);
+            tween.easing(TWEEN.Easing.Quadratic.Out);
+            tween.start();
+
+            const lookAtTween = new TWEEN.Tween(controls.target).to(planetPosition, 1000);
+            lookAtTween.easing(TWEEN.Easing.Quadratic.Out);
+            lookAtTween.start();
+        }
+    }
+}
+
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
     controls.update();
+    TWEEN.update();
 }
 animate();
