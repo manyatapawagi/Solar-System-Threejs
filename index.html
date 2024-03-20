@@ -6,6 +6,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/23.1.1/tween.umd.js"
         integrity="sha512-J8rv5Qz++2kwDP7YUBqxm3LCtPXWghcqXvxPrLrk81E31eMA/tEAjKakXJJDQoy9tj+41+EDYDsD6Xc76lnT7w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Madimi+One&family=Reem+Kufi:wght@400..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <style>
@@ -19,6 +26,56 @@
     body:active {
         cursor: grabbing;
     }
+
+    #popup {
+        background-color: antiquewhite;
+        position: absolute;
+        top: 30vh;
+        right: 20vw;
+        width: 200px;
+        cursor: default;
+        padding: 5px;
+        transform-style: preserve-3d;
+        border-radius: 5px;
+        display: none;
+        transition: 0.5s;
+    }
+
+    #popup:before {
+        content: "";
+        width: 25px;
+        height: 25px;
+        background-color: antiquewhite;
+        transform: rotate(45deg) translateZ(-1px);
+        position: absolute;
+        bottom: 5px;
+        left: -10px;
+    }
+
+    #popup p {
+        font-family: 'Reem Kufi';
+        margin: 0;
+        font-size: smaller;
+        text-align: center;
+        padding: 5px;
+        z-index: 100;
+    }
+
+    #popup h2 {
+        font-family: 'Madimi One';
+        margin: 0;
+        background-color: white;
+        padding: 0px 7px;
+    }
+
+    #close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        z-index: 5;
+        margin: 8px 5px 0px 0px;
+    }
 </style>
 <script type="importmap">
 		{
@@ -28,5 +85,17 @@
 		}
 		</script>
 <script src="script.js" type="module"></script>
+
+<body>
+    <div id="popup">
+        <div id="close"><span class="material-symbols-outlined">
+                close
+            </span></div>
+        <h2 id="name">NAME OF BODY</h2>
+        <p id="text">lorem lorem ipsum ipsum lorem lorem ipsum ipsum lorem lorem ipsum ipsum lorem lorem ipsum ipsum
+            lorem lorem
+            ipsum ipsum.</p>
+    </div>
+</body>
 
 </html>

@@ -244,6 +244,62 @@ scene.add(solarSystem);
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
+const popup = $("#popup");
+const closeBtn = $("#close");
+const content = $("#text");
+const title = $("#name");
+
+closeBtn.click(function () {
+    popup.css("display", "none");
+})
+
+const data = [
+    {
+        name: "Sun",
+        text: "The star at the center of our solar system, providing light, heat, and energy for life on Earth."
+    },
+
+    {
+        name: "Mercury",
+        text: "The smallest planet, closest to the Sun, with extreme temperature variations between its scorching days and freezing nights."
+    },
+
+    {
+        name: "Venus",
+        text: "Known as Earth's 'sister planet', Venus has a thick, toxic atmosphere and is the hottest planet in our solar system due to its greenhouse effect."
+    },
+
+    {
+        name: "Earth",
+        text: "The only known planet with life, characterized by its diverse ecosystems, abundant water, and unique atmosphere."
+    },
+
+    {
+        name: "Mars",
+        text: "The 'Red Planet', with a thin atmosphere and surface features including vast deserts, polar ice caps, and evidence of ancient water."
+    },
+
+    {
+        name: "Jupiter",
+        text: "The largest planet, famous for its swirling clouds and the Great Red Spot, a giant storm that has raged for centuries."
+    },
+
+    {
+        name: "Saturn",
+        text: " Known for its stunning rings made of ice and rock particles, Saturn is a gas giant with numerous moons and a complex magnetic field."
+    },
+
+    {
+        name: "Uranus",
+        text: "A gas giant with a unique feature - its axis of rotation is tilted sideways, causing extreme seasons and unusual magnetic field behavior."
+    },
+
+    {
+        name: "Neptune",
+        text: "The farthest known planet from the Sun, Neptune is a blue gas giant with strong winds and a dynamic atmosphere, including the fastest winds in the solar system."
+    }
+]
+
 window.addEventListener('click', onClick, false);
 
 function onClick(event) {
@@ -261,6 +317,10 @@ function onClick(event) {
 
             const intersectedObject = intersects[i].object;
 
+            const index = celestialBodies.indexOf(intersectedObject.parent);
+
+            const planetData = data[index];
+
             const planetPosition = new THREE.Vector3();
             intersectedObject.getWorldPosition(planetPosition);
 
@@ -268,7 +328,7 @@ function onClick(event) {
 
             const direction = new THREE.Vector3().subVectors(camera.position, planetPosition).normalize();
 
-            const distance = radius * 6; 
+            const distance = radius * 6;
 
             const newPosition = planetPosition.clone().add(direction.multiplyScalar(distance));
 
@@ -279,6 +339,10 @@ function onClick(event) {
             const lookAtTween = new TWEEN.Tween(controls.target).to(planetPosition, 1000);
             lookAtTween.easing(TWEEN.Easing.Quadratic.Out);
             lookAtTween.start();
+
+            popup.css("display", "block");
+            title.text(planetData.name);
+            content.text(planetData.text);
         }
     }
 }
