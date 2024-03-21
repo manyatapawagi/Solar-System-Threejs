@@ -35,6 +35,8 @@ const loader = new THREE.TextureLoader();
 
 var celestialBodies = [];
 
+var planetClicked;
+
 function createSun() {
     const sun = new THREE.Group();
 
@@ -73,6 +75,27 @@ function createMercury() {
     const main = new THREE.Mesh(geometry1, material1);
     mercury.add(main);
 
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 2 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry2 = new THREE.CylinderGeometry(0.05, 0.05, 3);
+    const material2 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry2, material2);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            mercury.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
+
     celestialBodies.push(mercury)
 
     return mercury;
@@ -88,7 +111,28 @@ function createVenus() {
     const main = new THREE.Mesh(geometry1, material1);
     venus.add(main);
 
-    celestialBodies.push(venus)
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 177 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry2 = new THREE.CylinderGeometry(0.1, 0.1, 8);
+    const material2 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry2, material2);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            venus.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
+
+    celestialBodies.push(venus);
 
     return venus;
 }
@@ -103,7 +147,28 @@ function createEarth() {
     const main = new THREE.Mesh(geometry1, material1);
     earth.add(main);
 
-    celestialBodies.push(earth)
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 23.5 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry2 = new THREE.CylinderGeometry(0.1, 0.1, 10);
+    const material2 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry2, material2);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            earth.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
+
+    celestialBodies.push(earth);
 
     return earth;
 }
@@ -117,6 +182,27 @@ function createMars() {
     });
     const main = new THREE.Mesh(geometry1, material1);
     mars.add(main);
+
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 25 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry2 = new THREE.CylinderGeometry(0.1, 0.1, 7);
+    const material2 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry2, material2);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            mars.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
 
     celestialBodies.push(mars)
 
@@ -134,7 +220,28 @@ function createJupiter() {
     const main = new THREE.Mesh(geometry1, material1);
     jupiter.add(main);
 
-    celestialBodies.push(jupiter)
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 3.1 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry2 = new THREE.CylinderGeometry(0.3, 0.3, 32);
+    const material2 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry2, material2);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            jupiter.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
+
+    celestialBodies.push(jupiter);
 
     return jupiter;
 }
@@ -158,6 +265,27 @@ function createSaturn() {
     ring.rotation.x = Math.PI / 2;
     saturn.add(ring);
 
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 26.7 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry3 = new THREE.CylinderGeometry(0.3, 0.3, 30);
+    const material3 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry3, material3);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            saturn.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
+
     celestialBodies.push(saturn)
 
     return saturn;
@@ -173,6 +301,27 @@ function createUranus() {
     });
     const main = new THREE.Mesh(geometry1, material1);
     uranus.add(main);
+
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 97.7 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry2 = new THREE.CylinderGeometry(0.2, 0.2, 16);
+    const material2 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry2, material2);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            uranus.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
 
     celestialBodies.push(uranus)
 
@@ -190,7 +339,28 @@ function createNeptune() {
     const main = new THREE.Mesh(geometry1, material1);
     neptune.add(main);
 
-    celestialBodies.push(neptune)
+    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const angle = 28 * (Math.PI / 180);
+    main.rotateOnAxis(axis, angle);
+
+    const geometry2 = new THREE.CylinderGeometry(0.2, 0.2, 16);
+    const material2 = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    const axisLine = new THREE.Mesh(geometry2, material2);
+    axisLine.rotateOnAxis(axis, angle);
+
+    function check() {
+        if (planetClicked) {
+            neptune.add(axisLine);
+        }
+
+        requestAnimationFrame(check);
+    }
+
+    check();
+
+    celestialBodies.push(neptune);
 
     return neptune;
 }
@@ -315,6 +485,8 @@ function onClick(event) {
 
             console.log(intersects[i].object);
 
+            planetClicked = true;
+
             const intersectedObject = intersects[i].object;
 
             const index = celestialBodies.indexOf(intersectedObject.parent);
@@ -343,6 +515,15 @@ function onClick(event) {
             popup.css("display", "block");
             title.text(planetData.name);
             content.text(planetData.text);
+
+            function rotate() {
+                requestAnimationFrame(rotate);
+                intersects[i].object.rotation.y += 0.005;
+            }
+            
+            if (planetData.name != "Sun") {
+                rotate();
+            }
         }
     }
 }
