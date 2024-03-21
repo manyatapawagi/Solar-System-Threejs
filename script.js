@@ -302,7 +302,7 @@ function createUranus() {
     const main = new THREE.Mesh(geometry1, material1);
     uranus.add(main);
 
-    const axis = new THREE.Vector3(0, 0, 1).normalize();
+    const axis = new THREE.Vector3(1, 0, 0).normalize();
     const angle = 97.7 * (Math.PI / 180);
     main.rotateOnAxis(axis, angle);
 
@@ -324,6 +324,8 @@ function createUranus() {
     check();
 
     celestialBodies.push(uranus)
+
+    uranus.rotation.z = Math.PI/4;
 
     return uranus;
 }
