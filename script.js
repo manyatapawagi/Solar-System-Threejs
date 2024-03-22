@@ -2,6 +2,8 @@ import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/Orb
 import { RGBELoader } from 'https://unpkg.com/three@0.162.0/examples/jsm/loaders/RGBELoader.js';
 import { EXRLoader } from 'https://unpkg.com/three@0.162.0/examples/jsm/loaders/EXRLoader.js';
 
+document.getElementById("loader").style.display = "flex";
+
 const scene = new THREE.Scene();
 // scene.background = new THREE.Color(0xbdbfbf);
 scene.rotation.y = Math.PI / 2;
@@ -537,3 +539,7 @@ function animate() {
     TWEEN.update();
 }
 animate();
+
+window.addEventListener("load", function () {
+  document.getElementById("loader").style.display = "none";
+});
